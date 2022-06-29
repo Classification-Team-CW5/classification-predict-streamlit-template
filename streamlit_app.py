@@ -1,12 +1,8 @@
-from msilib.schema import CheckBox
-from click import style
 import streamlit as st
 import joblib, os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import plotly.express as px
-import seaborn as sns
 import requests
 import re
 import emoji
