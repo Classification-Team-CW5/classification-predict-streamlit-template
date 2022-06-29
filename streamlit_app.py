@@ -3,6 +3,7 @@ import joblib, os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import requests
 import re
 import emoji
@@ -201,8 +202,9 @@ def main():
 
             st.subheader('Single tweet classification')
             user_text = st.text_area("Enter Text","")
-            models = ["Logistic Regression","Support Vector Classifier"]
+            models = ["Logistic Regression","Support Vector Classifier", "MultinomialNB", "Random Forest"]
             st.sidebar.title("Model")
+            st.sidebar.info("Choose a model that you like to make predictions with")
             model_selection = st.sidebar.selectbox("Choose A ML Model:",models)
                 
             prediction_labels = {'Anti':-1,'Neutral':0,'Pro':1,'News':2}
@@ -217,6 +219,16 @@ def main():
 
                 elif model_selection == "Support Vector Classifier":
                     predictor = load_prediction_models("resources/svm.pkl")
+                    prediction = predictor.predict(vect_text)
+                    st.success("Tweet Submitted")
+
+                elif model_selection == "MultinomialNB":
+                    predictor = load_prediction_models("resources/MultinomialNB_model.pkl")
+                    prediction = predictor.predict(vect_text)
+                    st.success("Tweet Submitted")
+
+                elif model_selection == "Random Forest":
+                    predictor = load_prediction_models("resources/RandomForest_model.pkl")
                     prediction = predictor.predict(vect_text)
                     st.success("Tweet Submitted")
 
